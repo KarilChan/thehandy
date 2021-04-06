@@ -12,6 +12,7 @@ import {
     SyncPrepareResponse,
     VersionResponse,
 } from "./types";
+import axios, {AxiosResponse} from "axios";
 
 const baseUrl = "https://www.handyfeeling.com/api/v1/";
 
@@ -117,10 +118,15 @@ class Handy {
     async getStatus(): Promise<StatusResponse> {
         this.enforceConnectionKey();
         const url = this.getUrl("getStatus");
-        const response = await fetch(url);
-        const json = await response.json();
-        if (json.error) throw json;
-        return json;
+        const response = await axios.get(url);
+        this.handleErrors(response);
+        return response.data;
+    }
+
+    private handleErrors(response: AxiosResponse) {
+        if (response.status !== 200) {
+            throw response;
+        }
     }
 
     //---------------------------------------------

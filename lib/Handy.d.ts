@@ -15,6 +15,7 @@ declare class Handy {
     getVersion(): Promise<VersionResponse>;
     getSettings(): Promise<SettingsResponse>;
     getStatus(): Promise<StatusResponse>;
+    private handleErrors;
     getServerTimeOffset(trips?: number, onProgress?: (progress: number) => void): Promise<number>;
     syncPrepare(scriptUrl: string, name?: string, size?: number): Promise<SyncPrepareResponse>;
     syncPlay(play?: boolean, time?: number): Promise<SyncPlayResponse>;

@@ -25,5 +25,8 @@
   "types": "lib",
   "scripts": {
     "build": "tsc -p ."
+  },
+  "dependencies": {
+    "axios": "^0.21.1"
   }
 }
