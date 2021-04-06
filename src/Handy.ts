@@ -100,9 +100,7 @@ class Handy {
     async getVersion(): Promise<VersionResponse> {
         this.enforceConnectionKey();
         const url = this.getUrl("getVersion");
-        console.time('test');
         const response = await fetch(url);
-        console.timeEnd('test');
         const json = await response.json();
         if (json.error) throw json;
         return json;
