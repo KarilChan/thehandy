@@ -128,14 +128,14 @@ class Handy {
         const url = this.getUrl("getServerTime");
 
         //don't count the first one
-        await (await fetch(url)).json();
+        void await axios.get(url);
 
         let offsets = [];
         for (let i = 0; i < trips; i++) {
             const startTime = new Date().valueOf();
 
-            const response = await fetch(url);
-            const json = await response.json();
+            const response = await axios.get(url);
+            const json = response.data;
             const endTime = new Date().valueOf();
             const rtd = endTime - startTime;
             const estimatedServerTime = Number(json.serverTime) + rtd / 2;
