@@ -19,15 +19,8 @@ class Handy {
     _connectionKey: string;
     serverTimeOffset: number;
 
-    constructor(connectionKey?: string) {
-        if (connectionKey) {
-            this._connectionKey = connectionKey;
-            localStorage.setItem("connectionKey", connectionKey);
-        } else {
-            const storedConnectionKey = localStorage.getItem("connectionKey");
-            if (storedConnectionKey) this._connectionKey = storedConnectionKey;
-            else this._connectionKey = "";
-        }
+    constructor(connectionKey: string) {
+        this._connectionKey = connectionKey;
         this.serverTimeOffset = 0;
     }
 
@@ -36,7 +29,6 @@ class Handy {
     }
     set connectionKey(connectionKey: string) {
         this._connectionKey = connectionKey;
-        localStorage.setItem("connectionKey", connectionKey);
     }
 
     //---------------------------------------------
