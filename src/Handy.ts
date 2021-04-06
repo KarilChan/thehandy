@@ -38,60 +38,53 @@ class Handy {
     async setMode(mode: HandyMode): Promise<ModeResponse> {
         this.enforceConnectionKey();
         const url = this.getUrl("setMode") + "?mode=" + mode;
-        const response = await fetch(url);
-        const json = await response.json();
-        if (json.error) throw json;
-        return json;
+        const response = await axios.get(url);
+        this.handleErrors(response);
+        return response.data;
     }
     async toggleMode(mode: HandyMode): Promise<ModeResponse> {
         this.enforceConnectionKey();
         const url = this.getUrl("toggleMode") + "?mode=" + mode;
-        const response = await fetch(url);
-        const json = await response.json();
-        if (json.error) throw json;
-        return json;
+        const response = await axios.get(url);
+        this.handleErrors(response);
+        return response.data;
     }
     async setSpeed(speed: number, absolute?: boolean): Promise<SetSpeedResponse> {
         this.enforceConnectionKey();
         const type = absolute ? "mm/s" : "%";
         const url = this.getUrl("setSpeed") + "?speed=" + speed + "&type=" + type;
-        const response = await fetch(url);
-        const json = await response.json();
-        if (json.error) throw json;
-        return json;
+        const response = await axios.get(url);
+        this.handleErrors(response);
+        return response.data;
     }
     async setStroke(speed: number, absolute?: boolean): Promise<SetStrokeResponse> {
         this.enforceConnectionKey();
         const type = absolute ? "mm" : "%";
         const url = this.getUrl("setStroke") + "?stroke=" + speed + "&type=" + type;
-        const response = await fetch(url);
-        const json = await response.json();
-        if (json.error) throw json;
-        return json;
+        const response = await axios.get(url);
+        this.handleErrors(response);
+        return response.data;
     }
     async setStrokeZone(min: number, max: number): Promise<CommandResponse> {
         this.enforceConnectionKey();
         const url = this.getUrl("setStrokeZone") + "?min=" + min + "&max=" + max;
-        const response = await fetch(url);
-        const json = await response.json();
-        if (json.error) throw json;
-        return json;
+        const response = await axios.get(url);
+        this.handleErrors(response);
+        return response.data;
     }
     async stepSpeed(directionUp: boolean): Promise<SetSpeedResponse> {
         this.enforceConnectionKey();
         const url = this.getUrl("stepSpeed") + "?step=" + directionUp;
-        const response = await fetch(url);
-        const json = await response.json();
-        if (json.error) throw json;
-        return json;
+        const response = await axios.get(url);
+        this.handleErrors(response);
+        return response.data;
     }
     async stepStroke(directionUp: boolean): Promise<SetStrokeResponse> {
         this.enforceConnectionKey();
         const url = this.getUrl("stepStroke") + "?step=" + directionUp;
-        const response = await fetch(url);
-        const json = await response.json();
-        if (json.error) throw json;
-        return json;
+        const response = await axios.get(url);
+        this.handleErrors(response);
+        return response.data;
     }
 
     //---------------------------------------------
@@ -100,19 +93,17 @@ class Handy {
     async getVersion(): Promise<VersionResponse> {
         this.enforceConnectionKey();
         const url = this.getUrl("getVersion");
-        const response = await fetch(url);
-        const json = await response.json();
-        if (json.error) throw json;
-        return json;
+        const response = await axios.get(url);
+        this.handleErrors(response);
+        return response.data;
     }
 
     async getSettings(): Promise<SettingsResponse> {
         this.enforceConnectionKey();
         const url = this.getUrl("getSettings");
-        const response = await fetch(url);
-        const json = await response.json();
-        if (json.error) throw json;
-        return json;
+        const response = await axios.get(url);
+        this.handleErrors(response);
+        return response.data;
     }
 
     async getStatus(): Promise<StatusResponse> {
@@ -177,10 +168,9 @@ class Handy {
         let url = this.getUrl("syncPrepare") + "?url=" + scriptUrl + "&timeout=30000";
         if (name) url += "&name=" + name;
         if (size) url += "&size=" + size;
-        const response = await fetch(url);
-        const json = await response.json();
-        if (json.error) throw json;
-        return json;
+        const response = await axios.get(url);
+        this.handleErrors(response);
+        return response.data;
     }
 
     async syncPlay(play = true, time = 0): Promise<SyncPlayResponse> {
@@ -194,19 +184,17 @@ class Handy {
             serverTime +
             "&time=" +
             time;
-        const response = await fetch(url);
-        const json = await response.json();
-        if (json.error) throw json;
-        return json;
+        const response = await axios.get(url);
+        this.handleErrors(response);
+        return response.data;
     }
 
     async syncOffset(offset: number): Promise<SyncOffsetResponse> {
         this.enforceConnectionKey();
         const url = this.getUrl("syncOffset") + "?offset=" + offset;
-        const response = await fetch(url);
-        const json = await response.json();
-        if (json.error) throw json;
-        return json;
+        const response = await axios.get(url);
+        this.handleErrors(response);
+        return response.data;
     }
 
     async syncAdjustTimestamp(videoTimeSeconds: number, filter = 0.5): Promise<boolean> {
@@ -215,10 +203,9 @@ class Handy {
             + "?currentTime=" + (videoTimeSeconds * 1000)
             + "&serverTime=" + Math.round(new Date().valueOf() + this.serverTimeOffset)
             + "&filter=" + filter;
-        const response = await fetch(url);
-        const json = await response.json();
-        if (json.error) throw json;
-        return json;
+        const response = await axios.get(url);
+        this.handleErrors(response);
+        return response.data;
     }
 
     async uploadCsv(csv: File, filename?: string): Promise<CsvUploadResponse> {
