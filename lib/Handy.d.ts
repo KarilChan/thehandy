@@ -2,7 +2,7 @@ import { CommandResponse, CsvUploadResponse, HandyMode, ModeResponse, SetSpeedRe
 declare class Handy {
     _connectionKey: string;
     serverTimeOffset: number;
-    constructor(connectionKey?: string);
+    constructor(connectionKey: string);
     get connectionKey(): string;
     set connectionKey(connectionKey: string);
     setMode(mode: HandyMode): Promise<ModeResponse>;
