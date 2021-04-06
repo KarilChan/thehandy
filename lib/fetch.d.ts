@@ -1,6 +1,3 @@
-interface IFetch {
-    json: any;
-}
-declare const fetch: (url: string) => Promise<IFetch>;
+declare const fetch: (url: string) => Promise<any>;
 export default fetch;
 //# sourceMappingURL=fetch.d.ts.map

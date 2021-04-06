@@ -1,11 +1,7 @@
 import https from 'https';
 import http from 'node:http';
 
-interface IFetch {
-    json: any
-}
-
-const fetch = (url: string): Promise<IFetch> => {
+const fetch = (url: string): Promise<any> => {
     return new Promise(resolve => {
         const callback = (response: http.IncomingMessage) => {
             let str = '';
@@ -13,10 +9,7 @@ const fetch = (url: string): Promise<IFetch> => {
                 str += chunk;
             });
             response.on('end', () => {
-                resolve({
-                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                    json: JSON.parse(str)
-                });
+                resolve(JSON.parse(str));
             });
         }
         const request = https.request(url, callback);
