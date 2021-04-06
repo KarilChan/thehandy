@@ -1,6 +1,5 @@
 import {
     CommandResponse,
-    CsvUploadResponse,
     HandyMode,
     ModeResponse,
     SetSpeedResponse,
@@ -12,7 +11,7 @@ import {
     SyncPrepareResponse,
     VersionResponse,
 } from "./types";
-import fetch from "node-fetch";
+import fetch from "./fetch";
 
 const baseUrl = "https://www.handyfeeling.com/api/v1/";
 
@@ -101,9 +100,7 @@ class Handy {
         this.enforceConnectionKey();
         const url = this.getUrl("getVersion");
         const response = await fetch(url);
-        const json = await response.json();
-        if (json.error) throw json;
-        return json;
+        return response.json;
     }
 
     async getSettings(): Promise<SettingsResponse> {

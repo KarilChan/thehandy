@@ -1,20 +1,27 @@
-/*
-import https from "https";
+import https from 'https';
+import http from 'node:http';
 
-interface IFetchResponse {
+interface IFetch {
     json: any
 }
 
-const fetch = async (url: string): Promise<IFetchResponse> => {
-    https.get(url, (res) => {
-        res.on('data', (d) => {
-            process.stdout.write(d);
-        });
-        res.on('end', () => {
-        })
-    }).on('error', (e) => {
-        console.error(e);
-    }).end();
+const fetch = (url: string): Promise<IFetch> => {
+    return new Promise(resolve => {
+        const callback = (response: http.IncomingMessage) => {
+            let str = '';
+            response.on('data', (chunk) => {
+                str += chunk;
+            });
+            response.on('end', () => {
+                resolve({
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    json: JSON.parse(str)
+                });
+            });
+        }
+        const request = https.request(url, callback);
+        request.end();
+    });
 }
 
-export default fetch;*/
+export default fetch;
