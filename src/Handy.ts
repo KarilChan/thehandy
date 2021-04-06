@@ -97,13 +97,9 @@ class Handy {
     //                  GET DATA
     //---------------------------------------------
     public getVersion(): Promise<VersionResponse> {
-        return new Promise<VersionResponse>((resolve) => {
-            this.enforceConnectionKey();
-            const url = this.getUrl("getVersion");
-            const response = fetch(url).then(value => {
-                resolve(value as VersionResponse);
-            });
-        })
+        this.enforceConnectionKey();
+        const url = this.getUrl("getVersion");
+        return fetch(url);
     }
 
     async getSettings(): Promise<SettingsResponse> {
