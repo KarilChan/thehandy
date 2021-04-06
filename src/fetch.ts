@@ -1,3 +1,4 @@
+/*
 import https from "https";
 
 interface IFetchResponse {
@@ -10,11 +11,10 @@ const fetch = async (url: string): Promise<IFetchResponse> => {
             process.stdout.write(d);
         });
         res.on('end', () => {
-            console.timeEnd(`test ${i}`);
         })
     }).on('error', (e) => {
         console.error(e);
     }).end();
 }
 
-export default fetch;
+export default fetch;*/
